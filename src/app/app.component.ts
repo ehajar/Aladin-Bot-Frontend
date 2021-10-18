@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'AladinBot';
+
+  isShown = true; // TODO : set to false
+
+  showHideBox() {
+    this.isShown = !this.isShown;
+  }
 }
