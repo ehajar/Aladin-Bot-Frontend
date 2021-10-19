@@ -3,7 +3,7 @@ export default class ChatMessage {
   date: Date;
   isSenderBot: boolean;
 
-  constructor(msg: string, sender: boolean) {
+  constructor(msg: String, sender: boolean) {
     this.message = msg;
     this.date = new Date();
     this.isSenderBot = sender

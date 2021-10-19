@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BotBubbleComponent implements OnInit {
 
-   @Input() message: string = "";
+   @Input() message: String = "";
 
   constructor() { }
 

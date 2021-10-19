@@ -1,8 +1,7 @@
 <div
-  class="p-2 bubble"
+  class="bubble"
   [class.bot-color]="isBot"
   [class.user-color]="!isBot">
-    <p>
-      {{message}}
+    <p [innerHTML]="message">
     </p>
 </div>
