@@ -14,4 +14,7 @@ export class AppComponent {
   showHideBox() {
     this.isShown = !this.isShown;
   }
+  
+  
+  
 }

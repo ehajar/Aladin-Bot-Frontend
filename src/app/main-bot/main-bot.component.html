@@ -1,0 +1,15 @@
+<div class="message-box" *ngIf="isShown">
+    <div class="text-center img-section">
+      <img src="assets/images/logo.png" class="w-50"/>
+    </div>
+    <div class="chat-section">
+      <div *ngFor="let chatMessage of chatMessages">
+        <app-bot-bubble
+        [message]="chatMessage.message"
+        *ngIf="chatMessage.isSenderBot"></app-bot-bubble>
+        <app-user-bubble
+        [message]="chatMessage.message"
+        *ngIf="!chatMessage.isSenderBot"></app-user-bubble>
+      </div>
+    </div>
+  </div>

@@ -3,14 +3,9 @@
   <div>
     <button class="btn round-btn" (click)="showHideBox()"> Chat </button>
   </div>
+ <app-main-bot [isShown]="isShown"></app-main-bot>
 
-  <div class="message-box" *ngIf="isShown">
-    <div class="text-center img-section">
-      <img src="assets/images/logo.png" class="w-50"/>
-    </div>
-    <div class="chat-section">
-      OKAY
-    </div>
-  </div>
+  
 
 </div>
+
