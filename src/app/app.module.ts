@@ -9,6 +9,7 @@ import { UserBubbleComponent } from './main-bot/user-bubble/user-bubble.componen
 import { BubbleComponent } from './main-bot/bubble/bubble.component';
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingBubblesComponent } from './main-bot/loading-bubbles/loading-bubbles.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     MainBotComponent,
     BotBubbleComponent,
     UserBubbleComponent,
-    BubbleComponent
+    BubbleComponent,
+    LoadingBubblesComponent
   ],
   imports: [
     BrowserModule,

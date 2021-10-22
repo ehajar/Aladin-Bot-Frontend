@@ -48,11 +48,37 @@
   font-family: "Calibri";
   font-size: 1.2rem;
   padding: 10px 20px;
-  animation: fadeIn 0.5s linear;
 
   p {
     width: fit-content;
     margin: 0;
+  }
+}
+
+
+.e1{
+  animation: taadaa 1s alternate-reverse infinite;
+  color: #d6d6d6;
+}
+.e2{
+  animation-delay: 0.3s;
+  animation: taadaa 1s alternate-reverse infinite;
+  color: #d6d6d6;
+  margin: 0 10px;
+}
+.e3{
+  animation-delay: 0.6s;
+  animation: taadaa 1s alternate-reverse infinite;
+  color: #d6d6d6;
+}
+
+@keyframes taadaa {
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 

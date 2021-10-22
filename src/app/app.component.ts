@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {MainBotComponent} from "./main-bot/main-bot.component";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,15 @@ export class AppComponent {
 
   title = 'AladinBot';
 
-  isShown = true; // TODO : set to false
+  isShown = false;
+
+  @ViewChild(MainBotComponent) child: MainBotComponent | undefined;
 
   showHideBox() {
     this.isShown = !this.isShown;
+    this.child?.resetBotData();
   }
-  
-  
-  
+
+
+
 }

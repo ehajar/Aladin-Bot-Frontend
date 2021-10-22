@@ -17,7 +17,9 @@ export class MainBotComponent implements OnInit {
   userMessage: String = "";
   serviceHelper: ServiceHelper;
 
-  language : LangModel | null = null;
+  language: LangModel | null = null;
+
+  loading: boolean = false;
 
   @ViewChild('messageList') messageListElem: ElementRef | undefined;
   @ViewChild('textFiled') textFiled: ElementRef | undefined;
@@ -38,28 +40,45 @@ export class MainBotComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
-
-
+    if (!this.isShown) {
+      this.language = null;
+    }
   }
 
-
-  processMessage(userMessage: String) {
-    if(this.language == null ) this.processLanguage(userMessage);
-
-    this.processText(userMessage);
+  async processMessage(userMessage: String) {
+    if (!this.language)
+      this.processLanguage(userMessage).then(() => {
+        //this.processTextAdvanced(userMessage);
+        this.processText(userMessage);
+      });
+    else
+      //this.processTextAdvanced(userMessage);
+      this.processText(userMessage);
 
   }
+  async processMessage_New(userMessage: String) {
+    if (!this.language)
+      this.processLanguage(userMessage).then(() => {
+        this.processTextAdvanced(userMessage);
+      });
+    else
+      this.processTextAdvanced(userMessage);
+  }
 
-  processLanguage(userMessage: String){
-    this.http.post<{langCode: Number, lang: String}>("http://localhost:3030/API/language/get",{message:userMessage}).subscribe((e)=>{
-      if (e.langCode == -1){
+  async processLanguage(userMessage: String) {
+    this.loading = true;
+    await this.http.post<{ langCode: Number, lang: String }>("http://localhost:3030/API/language/get", {
+      message: userMessage
+    }).subscribe((e) => {
+      if (e.langCode == -1) {
         this.addUnknownLanguage();
-      }else{
+      } else {
         this.language = getMyLanguage(e.langCode);
+        console.log(this.language, e.langCode);
         this.addIKnowYourLanguage();
       }
+      this.loading = false;
     })
   }
 
@@ -74,19 +93,40 @@ export class MainBotComponent implements OnInit {
     this.addReply(this.language.greetings);
   }
 
-  processText(userMessage: String){
-    if(userMessage.includes("made you")){
-      this.addReply("My creators are both <strong>Hajar EL HAKOUR</strong> & <strong>Anass AIT BEN EL ARBI</strong> for their project")
+  processText(userMessage: String) {
+    if (userMessage.includes("made you")) {
+      setTimeout(() => {
+        this.addReply("My creators are both <strong>Hajar EL HAKOUR</strong> & <strong>Anass AIT BEN EL ARBI</strong> for their project")
+
+      }, 800)
     }
   }
 
+  processTextAdvanced(userMessage: String) {
+    this.loading = true;
 
+    this.http.post<{ data: Array<{ catCode: Number, cat: String }> }>("http://localhost:3030/API/coms/communicate", {
+      message: userMessage,
+      langCode: this.language?.code || 1
+    }).subscribe((e) => {
+      for (let x of e.data) {
+        const str = (this.language || new LangModel()).getFromCode(x.catCode);
+        this.addReply(str);
+      }
+      this.loading = false;
+    })
+  }
+
+
+  // PRIMARY FUNCTION
   sendMessage() {
     this.addMessage(this.userMessage);
 
     this.processMessage(this.userMessage);
-    this.userMessage = "";
+    //this.processMessage_New(this.userMessage);  // TODO TEST REQUIRED!!!
+    this.userMessage = "";  
   }
+
 
 
   addMessage(message: String) {
@@ -98,11 +138,9 @@ export class MainBotComponent implements OnInit {
     }, 100)
   }
 
-
   addReply(message: String) {
     this.chatMessages.push(new ChatMessage(message.trim(), true));
     setTimeout(() => {
-
       if (this.messageListElem != undefined)
         this.messageListElem.nativeElement.scrollTop = this.messageListElem.nativeElement.scrollHeight;
     }, 100)
@@ -110,5 +148,10 @@ export class MainBotComponent implements OnInit {
 
   isNotEmpty() {
     return this.userMessage.trim().length == 0;
+  }
+
+  resetBotData() {
+    this.language = null;
+    this.chatMessages = [];
   }
 }
