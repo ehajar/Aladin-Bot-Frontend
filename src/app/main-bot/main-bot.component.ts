@@ -22,7 +22,6 @@ export class MainBotComponent implements OnInit {
   loading: boolean = false;
 
   @ViewChild('messageList') messageListElem: ElementRef | undefined;
-  @ViewChild('textFiled') textFiled: ElementRef | undefined;
 
 
   constructor(private http: HttpClient) {
@@ -57,11 +56,10 @@ export class MainBotComponent implements OnInit {
       this.processText(userMessage);
 
   }
+
   async processMessage_New(userMessage: String) {
     if (!this.language)
-      this.processLanguage(userMessage).then(() => {
-        this.processTextAdvanced(userMessage);
-      });
+      this.processLanguage(userMessage);
     else
       this.processTextAdvanced(userMessage);
   }
@@ -71,26 +69,25 @@ export class MainBotComponent implements OnInit {
     await this.http.post<{ langCode: Number, lang: String }>("http://localhost:3030/API/language/get", {
       message: userMessage
     }).subscribe((e) => {
+      console.log("process", e);
       if (e.langCode == -1) {
         this.addUnknownLanguage();
       } else {
         this.language = getMyLanguage(e.langCode);
-        console.log(this.language, e.langCode);
         this.addIKnowYourLanguage();
       }
-      this.loading = false;
+      this.processTextAdvanced(userMessage);
     })
   }
 
   private addUnknownLanguage() {
-    this.addReply("I don't understand you! can you repeat?");
+    this.addReply(new LangModel().unknownLanguage);
   }
 
   addIKnowYourLanguage() {
     // @ts-ignore
     this.addReply(this.language.detectedLang);
-    // @ts-ignore
-    this.addReply(this.language.greetings);
+
   }
 
   processText(userMessage: String) {
@@ -109,6 +106,7 @@ export class MainBotComponent implements OnInit {
       message: userMessage,
       langCode: this.language?.code || 1
     }).subscribe((e) => {
+      console.log("processTextAdvanced", e);
       for (let x of e.data) {
         const str = (this.language || new LangModel()).getFromCode(x.catCode);
         this.addReply(str);
@@ -122,9 +120,9 @@ export class MainBotComponent implements OnInit {
   sendMessage() {
     this.addMessage(this.userMessage);
 
-    this.processMessage(this.userMessage);
-    //this.processMessage_New(this.userMessage);  // TODO TEST REQUIRED!!!
-    this.userMessage = "";  
+    //this.processMessage(this.userMessage);
+    this.processMessage_New(this.userMessage);
+    this.userMessage = "";
   }
 
 
