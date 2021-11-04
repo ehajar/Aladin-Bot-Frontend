@@ -1,0 +1,39 @@
+<div class="container-fluid full-page">
+  <div class="row">
+    <div class="col-12">
+      <div class="titleHolder align-self-center">
+        <h2>Welcome to the Admin Interface of Aladin-Bot</h2>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="w-100">
+          <div class="flexer fw-bold">
+            <div class="f-1">id</div>
+            <div class="f-1">User Input</div>
+            <div class="f-1">Bot Output</div>
+            <div class="f-1">Probability</div>
+            <div class="fixed-w">
+              Actions
+            </div>
+          </div>
+
+          <div class="flexer" *ngFor="let res of resList">
+            <div class="f-1">{{res.id}}</div>
+            <div class="f-1">{{res.input}}</div>
+            <div class="f-1">{{res.output.category}}</div>
+            <div class="f-1">{{res.output.probability}}</div>
+            <div class="fixed-w">
+              <div>
+                <button class="btn btn-outline-success ">C</button>
+                <button class="btn btn-outline-warning mx-2">O</button>
+                <button class="btn btn-outline-danger">X</button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

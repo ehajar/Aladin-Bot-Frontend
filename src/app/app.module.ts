@@ -10,6 +10,9 @@ import { BubbleComponent } from './main-bot/bubble/bubble.component';
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingBubblesComponent } from './main-bot/loading-bubbles/loading-bubbles.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { AdminComponent } from './admin/admin.component';
+import {AdminService} from "./admin/admin.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { LoadingBubblesComponent } from './main-bot/loading-bubbles/loading-bubb
     BotBubbleComponent,
     UserBubbleComponent,
     BubbleComponent,
-    LoadingBubblesComponent
+    LoadingBubblesComponent,
+    MainPageComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,10 @@ import { LoadingBubblesComponent } from './main-bot/loading-bubbles/loading-bubb
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AdminService,
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

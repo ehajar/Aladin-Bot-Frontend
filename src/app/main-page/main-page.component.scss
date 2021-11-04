@@ -1,0 +1,51 @@
+.full-page {
+  height: 100vh;
+  width: 100vw;
+  background: #e5e5e5;
+}
+
+.round-btn {
+  border-radius: 80px 5px 80px 80px;
+  padding: 10px;
+  background: #354d7c;
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 20px;
+
+  .image-holder img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  .morocco-images img {
+    background: #354d7c;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 #354d7c;
+    height: 500px;
+    object-fit: cover;
+  }
+}
+
+
+.moroccan-flag {
+  img {
+    position: absolute;
+    height: 150px;
+    top: 0;
+    transform: translate(100%, 0);
+    right: 0;
+  }
+}
+

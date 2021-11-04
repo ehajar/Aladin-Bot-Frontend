@@ -1,0 +1,26 @@
+<div class="container-fluid  full-page">
+
+  <div class="row centered">
+    <div class="col-6  align-self-center position-relative">
+
+      <div class="moroccan-flag w-100">
+        <img src="assets/morocco/morocco.jpg" alt="">
+      </div>
+      <div class="morocco-images">
+        <img class="d-block w-100" [src]="'assets/morocco/img'+carouselImages[imageIndex]+'.jpg'"
+             alt="{{imageIndex}}} slide">
+
+      </div>
+
+    </div>
+    <div class="col-6 image-holder text-center align-self-center">
+      <img src="./assets/images/logo.png" alt="">
+      <h2>Discover the beauty of Morocco</h2>
+      <h5>Ask Any question you want</h5>
+    </div>
+  </div>
+  <div>
+    <button class="btn round-btn" (click)="showHideBox()"> Chat</button>
+  </div>
+  <app-main-bot [isShown]="isShown"></app-main-bot>
+</div>

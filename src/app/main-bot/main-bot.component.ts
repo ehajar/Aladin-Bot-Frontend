@@ -1,8 +1,8 @@
-import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import ChatMessage from "../Models/ChatMessage";
 import ServiceHelper from "../services/ServiceHelper";
-import {HttpClient} from "@angular/common/http";
 import LangModel from "../languages/LangModel";
+import {HttpClient} from "@angular/common/http";
 import getMyLanguage from "../languages/MyLanguage";
 
 @Component({
@@ -11,7 +11,6 @@ import getMyLanguage from "../languages/MyLanguage";
   styleUrls: ['./main-bot.component.scss']
 })
 export class MainBotComponent implements OnInit {
-
   chatMessages: Array<ChatMessage> = [];
   @Input() isShown: boolean = false;
   userMessage: String = "";
@@ -72,11 +71,12 @@ export class MainBotComponent implements OnInit {
       console.log("process", e);
       if (e.langCode == -1) {
         this.addUnknownLanguage();
+        this.loading = false;
       } else {
         this.language = getMyLanguage(e.langCode);
         this.addIKnowYourLanguage();
+        this.processTextAdvanced(userMessage);
       }
-      this.processTextAdvanced(userMessage);
     })
   }
 
@@ -126,7 +126,6 @@ export class MainBotComponent implements OnInit {
   }
 
 
-
   addMessage(message: String) {
     this.chatMessages.push(new ChatMessage(message.trim(), false));
     setTimeout(() => {
@@ -151,5 +150,9 @@ export class MainBotComponent implements OnInit {
   resetBotData() {
     this.language = null;
     this.chatMessages = [];
+    this.userMessage = "";
+    this.loading = false;
   }
+
+
 }

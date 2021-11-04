@@ -1,0 +1,29 @@
+.full-page {
+  height: 100vh;
+  width: 100vw;
+  background: #e5e5e5;
+
+  .titleHolder{
+    width: fit-content;
+    border-radius: 5px;
+    background: white;
+    margin: 10px auto;
+    padding: 5px 60px;
+  }
+
+  .flexer{
+    display: flex;
+    .f-1{
+      flex: 1;
+    }
+    .fixed-w{
+      width: 140px;
+      margin: auto;
+      text-align: center;
+    }
+  }
+  .fw-bold{
+    border-bottom: solid black 2px;
+    margin-bottom: 10px;
+  }
+}

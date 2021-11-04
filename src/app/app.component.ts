@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MainBotComponent} from "./main-bot/main-bot.component";
 
 @Component({
@@ -6,11 +6,14 @@ import {MainBotComponent} from "./main-bot/main-bot.component";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'AladinBot';
 
   isShown = false;
+
+  carouselImages = [1, 2, 3, 4, 5, 6, 7];
+  imageIndex = 0;
 
   @ViewChild(MainBotComponent) child: MainBotComponent | undefined;
 
@@ -19,6 +22,11 @@ export class AppComponent {
     this.child?.resetBotData();
   }
 
+  ngOnInit(): void {
+    setInterval(() => {
+      this.imageIndex = (this.imageIndex + 1) % 7;
+    }, 1300);
+  }
 
 
 }
