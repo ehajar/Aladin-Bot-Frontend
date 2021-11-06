@@ -1,5 +1,5 @@
 .full-page {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background: #e5e5e5;
 
@@ -26,4 +26,8 @@
     border-bottom: solid black 2px;
     margin-bottom: 10px;
   }
+}
+
+.filters button{
+  border-radius: 50px;
 }

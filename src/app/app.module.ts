@@ -12,7 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadingBubblesComponent } from './main-bot/loading-bubbles/loading-bubbles.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AdminComponent } from './admin/admin.component';
-import {AdminService} from "./admin/admin.service";
+import {AdminService} from "./services/admin.service";
+import {ServiceHelper} from "./services/service-helper.service";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -29,11 +31,12 @@ import {AdminService} from "./admin/admin.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
     AdminService,
-
+    ServiceHelper
   ],
   bootstrap: [AppComponent]
 })

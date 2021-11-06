@@ -1,9 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import ChatMessage from "../Models/ChatMessage";
-import ServiceHelper from "../services/ServiceHelper";
-import LangModel from "../languages/LangModel";
-import {HttpClient} from "@angular/common/http";
-import getMyLanguage from "../languages/MyLanguage";
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MainBotComponent} from "../main-bot/main-bot.component";
 
 @Component({

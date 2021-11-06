@@ -1,11 +1,13 @@
-export declare interface HistoryType{
+export declare interface HistoryType {
   id: number,
-  input:string,
-  output : Output
+  input: string,
+  output: Output,
+  state: string,
+  lang: string
 }
 
-export declare interface Output{
+export declare interface Output {
   probability: number,
-  category : string,
+  category: string,
   catCode: number
 }
