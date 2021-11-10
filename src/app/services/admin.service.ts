@@ -16,10 +16,6 @@ export class AdminService {
   }
 
   changeState(state: number, id: number) {
-    console.log({
-      id: id,
-      state: state
-    });
     return this.http.post(environment.BASE_URL + "history/state", {
       id: id,
       state: state
@@ -28,5 +24,9 @@ export class AdminService {
 
   downloadFile(lang: string) {
     return this.http.get(environment.BASE_URL + "history/download/" + lang, {responseType: 'blob'}).toPromise();
+  }
+
+  uploadFileContent(lang: string, text: string) {
+    return this.http.post(environment.BASE_URL + "history/upload/" + lang, {text: text}).toPromise()
   }
 }

@@ -13,7 +13,7 @@ export class ServiceHelper {
   public processText(input: String, lang: number) {
     return this.http.post<Array<string>>(environment.BASE_URL + "coms/communicate", {
         message: input,
-        langCode: lang || 1
+        langCode: lang
       }
     );
   }

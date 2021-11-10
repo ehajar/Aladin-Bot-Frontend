@@ -52,20 +52,20 @@
       <div class="w-75 m-auto">
         <div class="flexer fw-bold">
           <div class="f-1">User Input</div>
-          <div class="f-1">Bot Output</div>
-          <div class="f-1">Language</div>
+          <div class="f-1 text-center">Bot Output</div>
+          <div class="f-1 text-center">Language</div>
           <div class="f-1">Probability</div>
           <div class="fixed-w">
             Actions
           </div>
         </div>
 
-        <ng-container *ngFor="let res of resList">
-          <div class="flexer my-2" *ngIf="displayCondition(res)">
-            <div class="f-1">{{res.input}}</div>
-            <div class="f-1">{{res.output.category}}</div>
-            <div class="f-1">{{res.lang}}</div>
-            <div class="f-1">{{res.output.probability}}</div>
+        <ng-container *ngFor="let res of resList; let i = index">
+          <div class="flexer p-2 " style="border-radius: 5px" *ngIf="displayCondition(res)" [class.bg-light]="i%2 == 1">
+            <div class="f-1 align-self-center">{{res.input}}</div>
+            <div class="f-1 align-self-center text-center">{{res.output.category}}</div>
+            <div class="f-1 align-self-center text-center">{{res.lang}}</div>
+            <div class="f-1 align-self-center">{{res.output.probability}}</div>
             <div class="fixed-w">
               <div>
                 <button class="{{res.state == VALID? 'btn btn-success':'btn btn-outline-success'}}"
@@ -108,10 +108,12 @@
       <fa-icon [icon]="icons.import" style="color:#cc9090" size="2x"></fa-icon>
       <h3> Import training Model</h3>
       <div>
-        <button class="btn btn-secondary  ">Upload File • EN</button>
+        <button class="btn btn-secondary" (click)="uploadFile(fileEn, 'en')">Upload File • EN</button>
+        <input type="file" class="d-none" accept="text/plain" #fileEn>
       </div>
       <div class="my-3">
-        <button class="btn btn-secondary  ">Upload File • FR</button>
+        <button class="btn btn-secondary" (click)="uploadFile(fileFr, 'fr')">Upload File • FR</button>
+        <input type="file" class="d-none" accept="text/plain" #fileFr>
       </div>
     </div>
 

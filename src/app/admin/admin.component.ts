@@ -4,8 +4,6 @@ import {HistoryType} from "../types/Types";
 import {
   faCheck,
   faClock, faDownload,
-  faFileExport,
-  faFileImport,
   faFilter, faFlag,
   faList,
   faTimes, faUpload
@@ -50,7 +48,6 @@ export class AdminComponent implements OnInit {
 
   loadData() {
     this.service.getAllCommands().then((res) => {
-      console.log(res);
       this.resList = res;
     })
   }
@@ -63,7 +60,6 @@ export class AdminComponent implements OnInit {
 
   downloadFile(lang: string) {
     this.service.downloadFile(lang).then((res) => {
-      console.log(res);
       this.downloader(res, lang);
     })
   }
@@ -83,5 +79,24 @@ export class AdminComponent implements OnInit {
   displayCondition(res: HistoryType) {
 
     return (this.filters == null || this.filters == res.state) && (this.langFilters == null || this.langFilters == res.lang);
+  }
+
+  uploadFile(file: HTMLInputElement, lang: string) {
+    file.click();
+    file.onchange = () => {
+      if (file.files) {
+        const selectedFile = file.files[0];
+        selectedFile.text().then((txt) => {
+          this.service.uploadFileContent(lang, txt).then(e => {
+            if(e){
+              alert("Model Updated successfully!")
+            }else{
+              alert("An error has occurred during the updated!")
+            }
+          })
+        })
+      }
+    }
+
   }
 }

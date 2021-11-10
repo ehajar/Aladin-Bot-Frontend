@@ -53,7 +53,6 @@ export class MainBotComponent implements OnInit {
   processLanguage(userMessage: String) {
     this.loading = true;
     this.serviceHelper.processLanguage(userMessage).subscribe((e) => {
-      console.log(e);
       if (e.langCode == -1) { // unknown language
         this.addUnknownLanguage(e.message);
         this.loading = false;
@@ -86,9 +85,7 @@ export class MainBotComponent implements OnInit {
 
   processTextAdvanced(userMessage: String) {
     this.loading = true;
-
     this.serviceHelper.processText(userMessage, this.language).subscribe((res) => {
-      console.log(res);
       res.map((e) => {
         this.addReply(e);
         this.loading = false;
