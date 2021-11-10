@@ -1,0 +1,37 @@
+<div class="message-box" *ngIf="isShown">
+  <div class="text-center img-section">
+    <img src="assets/images/logo.png" class="w-50" alt="Aladdin-Bot Logo"/>
+  </div>
+
+  <div class="chat-parent">
+
+    <div class="chat-section" #messageList>
+      <div *ngFor="let chatMessage of chatMessages">
+        <app-bot-bubble
+          [message]="chatMessage.message"
+          *ngIf="chatMessage.isSenderBot"></app-bot-bubble>
+        <app-user-bubble
+          [message]="chatMessage.message"
+          *ngIf="!chatMessage.isSenderBot"></app-user-bubble>
+
+
+      </div>
+      <app-loading-bubbles *ngIf="loading"></app-loading-bubbles>
+
+    </div>
+
+    <div class="user-input">
+      <div class="input-container">
+        <input
+               ui-keypress="{13:'sendMessage($event)'}"
+               [(ngModel)]="userMessage"
+               placeholder="Type your message..."
+               class="form-control"/>
+      </div>
+      <button class="btn" (click)="sendMessage()" [disabled]="isNotEmpty()">
+        SEND
+      </button>
+    </div>
+  </div>
+
+</div>
